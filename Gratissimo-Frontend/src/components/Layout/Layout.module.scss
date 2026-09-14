@@ -1,0 +1,16 @@
+@import "../../styles/variables";
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-content {
+  flex: 1;
+  padding: $spacing-md;
+
+  @include on-md {
+    padding: $spacing-lg;
+  }
+}

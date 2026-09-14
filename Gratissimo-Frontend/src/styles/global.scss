@@ -1,0 +1,71 @@
+@import "./variables";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+//The breakpoints jeg kan justere dem senere for forskellig skrifstørelse på diverse skærmstørelser:
+html {
+  font-size: 16px;
+
+  @include on-sm {
+    font-size: 16px;
+  }
+
+  @include on-md {
+    font-size: 16px;
+  }
+
+  @include on-lg {
+    font-size: 17px;
+  }
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-md;
+  font-weight: $font-weight-regular;
+}
+
+main {
+  min-height: calc(100vh - 200px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: $spacing-md;
+  color: $color-text;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2rem;
+
+  @include on-md {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: 1.75rem;
+
+  @include on-md {
+    font-size: 2rem;
+  }
+}
+
+a {
+  color: $color-white;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-accent;
+  }
+}

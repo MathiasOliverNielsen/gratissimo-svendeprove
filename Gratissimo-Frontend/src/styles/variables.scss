@@ -1,0 +1,106 @@
+// Colors
+$color-primary: #ab0e0e;
+$color-accent: #8b0808;
+$color-white: #f9f9f9;
+$color-white-alt: #f5eeec;
+$color-black: #111111;
+
+// Semantic color aliases
+$color-bg: $color-white;
+$color-text: $color-black;
+$color-border: #cccccc;
+
+$color-secondary: #8b0808; // or choose another secondary color
+$color-danger: #dc3545; // for danger/error states
+$color-background: $color-white;
+$color-surface: #f5f5f5; // slightly different from bg
+$color-border-light: #e0e0e0;
+
+// Spacing (rem)
+$spacing-xs: 0.5rem;
+$spacing-sm: 0.75rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+
+// Breakpoints (mobile-first)
+$breakpoint-sm: 480px; // Small phones
+$breakpoint-md: 768px; // Tablets
+$breakpoint-lg: 1024px; // Desktop
+$breakpoint-xl: 1440px; // Large desktop
+// Fonts
+$font-family:
+  "Montserrat",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  sans-serif;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+// Font sizes
+$font-size-sm: 0.75rem; // 12px
+$font-size-md: 1rem; // 16px
+$font-size-lg: 1.25rem; // 20px
+$font-size-xl: 1.5rem; // 24px
+
+// Border
+$border-width: 1px;
+// Border colors
+$color-border: #e0e0e0;
+
+// Border Radius
+$border-radius-sm: 0.25rem; // 4px
+$border-radius-md: 0.5rem; // 8px
+$border-radius-lg: 0.75rem; // 12px
+$border-radius-xl: 1rem; // 16px
+$border-radius-full: 9999px; // Full circle
+
+// Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+// Transitions
+$transition-base: 300ms ease-in-out;
+$transition-fast: 150ms ease-in-out;
+$transition-md: 300ms ease-in-out;
+$transition-slow: 500ms ease-in-out;
+
+// Breakpoint Mixins (mobile-first) Det her er en mixin jeg har lavet til at putte i en template, her kan man nemt skrive @include on-md {
+@mixin on-sm {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin on-md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin on-lg {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin on-xl {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+.my-component {
+  padding: $spacing-md;
+
+  @include on-md {
+    padding: $spacing-lg;
+  }
+
+  @include on-lg {
+    padding: $spacing-xl;
+  }
+}

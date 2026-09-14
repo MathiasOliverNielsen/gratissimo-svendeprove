@@ -1,0 +1,41 @@
+﻿// Card.scss
+@use "../../styles/variables.scss" as *;
+
+.card {
+  background-color: $color-background;
+  border: $border-width solid $color-border-light;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: all $transition-base;
+
+  &.hoverable {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: $shadow-md;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.card-header {
+  padding: $spacing-lg;
+  border-bottom: $border-width solid $color-border-light;
+  background-color: $color-surface;
+}
+
+.card-title {
+  font-size: $font-size-lg;
+  color: $color-text;
+}
+
+.card-body {
+  padding: $spacing-lg;
+}
+
+.card-footer {
+  padding: $spacing-lg;
+  border-top: $border-width solid $color-border-light;
+  background-color: $color-surface;
+}
