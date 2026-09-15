@@ -1,0 +1,39 @@
+@use "../../styles/variables" as *;
+
+.jobAdvertisementCard {
+  margin-bottom: $spacing-lg;
+  padding: $spacing-lg;
+}
+
+.header {
+  margin-bottom: $spacing-md;
+  
+  h3 {
+    margin-bottom: $spacing-sm;
+    color: $color-text;
+  }
+}
+
+.category {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  font-weight: bold;
+  margin: 0;
+}
+
+.organization {
+  font-weight: bold;
+  margin-bottom: $spacing-md;
+  color: $color-text;
+}
+
+.description {
+  margin-bottom: $spacing-md;
+  line-height: 1.6;
+  color: #666;
+}
+
+.detail {
+  font-size: $font-size-sm;
+  color: #666;
+}

@@ -1,0 +1,50 @@
+@use "../../styles/variables" as *;
+
+.frontpage {
+  width: 100%;
+}
+
+.categorySection {
+  margin-top: $spacing-2xl;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.categoryGrid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: $spacing-md;
+}
+
+.categoryCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: $spacing-md;
+  border: $border-width $color-border-light;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: $transition-md;
+  max-width: 400px;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+}
+
+.categoryName {
+  font-weight: bold;
+  margin-bottom: $spacing-sm;
+  text-align: center;
+}
+
+.categoryCount {
+  font-size: $font-size-sm;
+  color: $color-black;
+}

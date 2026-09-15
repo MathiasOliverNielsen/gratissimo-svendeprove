@@ -10,7 +10,7 @@ export function Navigation() {
         <ul className={styles.navGroup}>
           <FlexContainer gap="2rem">
             <li>
-              <NavLink to="/jobs">Alle jobs</NavLink>
+              <NavLink to="/search">Alle jobs</NavLink>
             </li>
             <li>
               <NavLink to="/create-ad">Opret annonce</NavLink>
