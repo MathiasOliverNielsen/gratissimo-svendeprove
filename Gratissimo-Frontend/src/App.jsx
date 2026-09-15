@@ -13,20 +13,20 @@ import { Layout } from "./components/Layout/Layout";
 function App() {
   return (
     <BrowserRouter>
-      <Layout />
-
-      <Routes>
-        <Route path="/" element={<FrontPage />} />
-        <Route path="/news" element={<NewsPage />} />
-        <Route path="/search" element={<SearchResults />} />
-        <Route path="/create-ad" element={<CreateAdvertisement />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        {/* My Page section - nested routes */}
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/edit" element={<EditPage />} />
-        <Route path="/mypage/favorites" element={<MyFavorites />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<FrontPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/create-ad" element={<CreateAdvertisement />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          {/* My Page section - nested routes */}
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mypage/edit" element={<EditPage />} />
+          <Route path="/mypage/favorites" element={<MyFavorites />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }

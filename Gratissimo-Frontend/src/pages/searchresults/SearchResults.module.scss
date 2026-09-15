@@ -1,0 +1,13 @@
+@use "../../styles/variables" as *;
+
+.searchResults {
+  padding: $spacing-lg;
+}
+
+.resultsSection {
+  margin-top: $spacing-lg;
+
+  h2 {
+    margin-bottom: $spacing-lg;
+  }
+}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { GridContainer } from "../GridContainer/GridContainer";
 import { FlexContainer } from "../FlexContainer/FlexContainer";
 import { InputField } from "../InputField/InputField";
@@ -10,6 +11,8 @@ import instagram from "../../assets/icons/SoMe/Instagram Circle.png";
 import linkedin from "../../assets/icons/SoMe/LinkedIn Circled.png";
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+
   return (
     <footer className={styles.footer}>
       <GridContainer columns={6} gap="1.5rem">
@@ -74,7 +77,7 @@ export function Footer() {
           <form className={styles.newsletterForm}>
             <FlexContainer className={styles.newsletterForm} gap="$spacing-sm">
               <div className={styles.inputWrapper}>
-                <InputField type="email" placeholder="@ Indtast email..." required />
+                <InputField type="email" placeholder="@ Indtast email..." value={email} onChange={(e) => setEmail(e.target.value)} required />
               </div>
               <div className={styles.buttonWrapper}>
                 <Button type="submit" variant="secondary">
