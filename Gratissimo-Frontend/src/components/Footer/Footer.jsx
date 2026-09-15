@@ -12,7 +12,7 @@ import linkedin from "../../assets/icons/SoMe/LinkedIn Circled.png";
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <GridContainer columns={6} gap="2rem">
+      <GridContainer columns={6} gap="1.5rem">
         {/* For jobsøgere */}
         <section className={styles.footerSection}>
           <h3>For jobsøgere</h3>
@@ -74,7 +74,7 @@ export function Footer() {
           <form className={styles.newsletterForm}>
             <FlexContainer className={styles.newsletterForm} gap="$spacing-sm">
               <div className={styles.inputWrapper}>
-                <InputField type="email" placeholder="Indtast email..." required />
+                <InputField type="email" placeholder="@ Indtast email..." required />
               </div>
               <div className={styles.buttonWrapper}>
                 <Button type="submit" variant="secondary">
@@ -90,7 +90,7 @@ export function Footer() {
           <p>
             Fidusvej 23
             <br />
-            9200 Øster Lundby
+            9230 Øster Lundby
             <br />
             +45 22 13 22 13
           </p>

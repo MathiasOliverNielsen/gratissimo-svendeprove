@@ -34,8 +34,10 @@
 .newsletterForm {
   margin-top: $spacing-md;
 }
+.wide {
+  grid-column: span 2;
+}
 .inputWrapper {
-  flex: 1;
   display: flex;
   align-items: center;
 
