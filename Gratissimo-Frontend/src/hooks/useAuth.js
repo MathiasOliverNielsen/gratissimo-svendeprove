@@ -40,18 +40,25 @@ export function useAuth() {
       setLoading(true);
       setError(null);
 
-      const response = await apiCall('/auth/login', {
+      const response = await apiCall('/login', {
         method: 'POST',
         body: { username: email, password },
       });
 
-      const { accessToken, user: userData } = response;
+      const {
+        accessToken,
+        refreshToken,
+        user: { id, firstname, lastname },
+      } = response;
 
-      if (!accessToken || !userData) {
+      if (!accessToken || !refreshToken) {
         throw new Error('Invalid response from server');
       }
 
       setAuthToken(accessToken);
+      setStorageItem('refreshToken', refreshToken);
+
+      const userData = { id, firstname, lastname, email };
       setStorageItem(STORAGE_KEYS.USER, userData);
       setUser(userData);
       setIsAuthenticated(true);
@@ -72,12 +79,47 @@ export function useAuth() {
     try {
       setAuthToken(null);
       removeStorageItem(STORAGE_KEYS.USER);
+      removeStorageItem('refreshToken');
       setUser(null);
       setIsAuthenticated(false);
       setError(null);
       return { success: true };
     } catch (err) {
       return { success: false, error: err.message };
+    }
+  }, []);
+
+  const register = useCallback(async (userData) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await apiCall('/users', {
+        method: 'POST',
+        body: {
+          email: userData.email,
+          password: userData.password,
+          firstname: userData.firstname,
+          lastname: userData.lastname,
+          phone: userData.phone,
+          address: userData.address,
+          city: userData.city,
+          zipcode: userData.zipcode,
+        },
+      });
+
+      setAuthToken(accessToken);
+      setStorageItem(STORAGE_KEYS.USER, newUser);
+      setUser(newUser);
+      setIsAuthenticated(true);
+
+      return { success: true };
+    } catch (err) {
+      const message = err.message || 'Registration failed';
+      setError(message);
+      return { success: false, error: message };
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -96,6 +138,7 @@ export function useAuth() {
     loading,
     error,
     login,
+    register,
     logout,
     updateUser,
     clearError,

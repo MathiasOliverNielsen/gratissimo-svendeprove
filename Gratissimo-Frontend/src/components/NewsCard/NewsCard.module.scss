@@ -1,0 +1,12 @@
+.newsCard img {
+  max-width: 300px;
+  height: auto;
+  display: block;
+  max-height: 200px;
+  object-fit: cover;
+}
+.newsCardMeta {
+  display: flex;
+  gap: 1rem; // Space between date and author
+  align-items: center;
+}

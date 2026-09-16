@@ -4,13 +4,23 @@ import { useFetch } from "../../hooks/useFetch";
 import { SearchFilter } from "../../components/SearchFilter/SearchFilter";
 import styles from "./FrontPage.module.scss";
 import { GridContainer } from "../../components/GridContainer/GridContainer";
+import { useArticles } from "../../hooks/useArticles";
+import { NewsCard } from "../../components/NewsCard/NewsCard";
 
 export default function FrontPage() {
   const navigate = useNavigate();
+  const { articles } = useArticles();
 
   // Fetch data
   const { data: jobs } = useFetch("http://localhost:4000/api/job-listings");
   const { data: categories } = useFetch("http://localhost:4000/api/job-categories");
+
+  // Pick 3 random articles but slice out article 3 cause no img in backend
+  const randomArticles =
+    articles
+      ?.filter((a) => a.id !== 3)
+      ?.sort(() => Math.random() - 0.5)
+      .slice(0, 3) || [];
 
   // Count jobs per category
   const categoryCounts = useMemo(() => {
@@ -38,7 +48,7 @@ export default function FrontPage() {
   };
 
   return (
-    <main className={styles.frontpage}>
+    <>
       <SearchFilter />
       <h2>Find job ved kategori</h2>
       {/* Category Grid */}
@@ -52,6 +62,14 @@ export default function FrontPage() {
           ))}
         </GridContainer>
       </section>
-    </main>
+      <section className={styles.newsSection}>
+        <h2>Udvalgte Nyheder</h2>
+        <GridContainer columns={3} gap="$spacing-md" autoFit={false}>
+          {randomArticles.map((article) => (
+            <NewsCard key={article.id} article={article} onClick={() => navigate(`/news/${article.id}`)} />
+          ))}
+        </GridContainer>
+      </section>
+    </>
   );
 }

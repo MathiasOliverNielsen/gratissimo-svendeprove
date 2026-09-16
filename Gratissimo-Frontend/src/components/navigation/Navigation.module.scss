@@ -2,4 +2,42 @@
 .navGroup {
   padding: $spacing-xs $spacing-xl $spacing-xl $spacing-2xl;
   list-style: none;
+  display: flex;
+  gap: $spacing-md;
+}
+.navGroup li {
+  display: inline;
+}
+.navGroup:last-of-type li:first-child {
+  border-right: 2px solid $color-text;
+  padding-right: $spacing-md;
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-sm;
+  margin-right: $spacing-md;
+}
+
+.navGroup li a {
+  text-decoration: none;
+  color: $color-white;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+.navGroup:last-of-type li:last-child {
+  padding-right: $spacing-md;
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-sm;
+  margin-right: $spacing-md;
+}
+.logoutButton {
+  background-color: $color-primary;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+
+  &:hover {
+    color: $color-primary;
+  }
 }

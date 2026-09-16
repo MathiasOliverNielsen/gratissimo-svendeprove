@@ -1,0 +1,37 @@
+.articleDetail {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.articleDetail .image {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 500px;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+
+.content {
+  padding: 0 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.content h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.articleInfo {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.contentText {
+  line-height: 1.6;
+  font-size: 1rem;
+}
