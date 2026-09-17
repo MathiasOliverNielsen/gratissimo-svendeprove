@@ -17,11 +17,6 @@ export default function SearchResults() {
     // TODO: implement save functionality
   };
 
-  const handleView = (jobId) => {
-    console.log("View job:", jobId);
-    // TODO: navigate to job detail page
-  };
-
   return (
     <main className={styles.searchResults}>
       <SearchFilter />

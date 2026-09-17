@@ -168,7 +168,7 @@ function filterJobs(jobs, searchText, filters) {
       console.log("Keep job?", jobDate >= startDate);
       // Keep only jobs created AFTER startDate
       if (jobDate < startDate) {
-        return false; // Filter out old jobs
+        return false;
       }
     }
 
