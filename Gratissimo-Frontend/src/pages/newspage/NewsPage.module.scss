@@ -1,0 +1,99 @@
+@use "../../styles/variables" as *;
+
+.articleDetail {
+  width: 100%;
+  margin-bottom: 3rem;
+
+  @media (max-width: $breakpoint-md) {
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.articleDetail .image {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 500px;
+  object-fit: cover;
+  margin-bottom: 2rem;
+
+  @media (max-width: $breakpoint-md) {
+    max-height: 300px;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    max-height: 200px;
+    margin-bottom: 1rem;
+  }
+}
+
+.content {
+  padding: 0 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 0 1rem;
+  }
+}
+
+.content h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.articleInfo {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.contentText {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.allArticles {
+  padding: 0 2rem;
+  max-width: 100%;
+  margin: 3rem auto 0;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 1.5rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: 0 1rem;
+    margin-top: 1.5rem;
+  }
+
+  h2 {
+    margin-bottom: 2rem;
+
+    @media (max-width: $breakpoint-sm) {
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+    }
+  }
+}

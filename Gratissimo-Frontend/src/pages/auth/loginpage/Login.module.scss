@@ -1,0 +1,119 @@
+@import "../../../styles/variables";
+
+.header {
+  color: $color-text;
+  padding: $spacing-2xl $spacing-xl;
+  margin-bottom: $spacing-xl;
+  text-align: center;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-xl $spacing-lg;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg $spacing-md;
+    margin-bottom: $spacing-lg;
+  }
+
+  h1 {
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-xl;
+    font-weight: 600;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  p {
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-md;
+    color: #666;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: $font-size-sm;
+    }
+  }
+
+  a {
+    color: $color-primary;
+    text-decoration: underline;
+    font-size: $font-size-md;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.formSection {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-md $spacing-md;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-md $spacing-sm;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-lg;
+    font-weight: 600;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+  }
+
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: $spacing-md;
+    border-radius: $border-radius-sm;
+    margin-bottom: $spacing-lg;
+    text-align: center;
+  }
+}
+
+.toggleText {
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $color-text;
+
+  button {
+    background: none;
+    border: none;
+    color: $color-primary;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    padding: 0;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.formSection form button[type="submit"] {
+  border-radius: 24px;
+  align-self: center;
+  min-width: 300px;
+
+  @media (max-width: $breakpoint-sm) {
+    min-width: 100%;
+  }
+}

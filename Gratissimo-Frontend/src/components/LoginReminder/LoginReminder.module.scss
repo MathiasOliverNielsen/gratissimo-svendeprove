@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+
+.reminder {
+  color: #111111;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+  span {
+    font-weight: 500;
+  }
+
+  .button {
+    background-color: $color-primary;
+    color: $color-white;
+    border: none;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius-full;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 400px;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
