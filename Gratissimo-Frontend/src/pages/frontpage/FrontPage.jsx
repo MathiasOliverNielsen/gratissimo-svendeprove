@@ -12,8 +12,8 @@ export default function FrontPage() {
   const { articles } = useArticles();
 
   // Fetch data
-  const { data: jobs } = useFetch("http://localhost:4000/api/job-listings");
-  const { data: categories } = useFetch("http://localhost:4000/api/job-categories");
+  const { data: jobs } = useFetch(`${import.meta.env.VITE_API_URL}/job-listings`);
+  const { data: categories } = useFetch(`${import.meta.env.VITE_API_URL}/job-categories`);
 
   // Pick 3 random articles but slice out article 3 cause no img in backend
   const randomArticles =
@@ -50,10 +50,11 @@ export default function FrontPage() {
   return (
     <>
       <SearchFilter />
-      <h2>Find job ved kategori</h2>
-      {/* Category Grid */}
-      <section className={styles.categorySection}>
-        <GridContainer columns={3} gap="$spacing-md" autoFit={false}>
+      <div className={styles.categoryWrapper}>
+        <h2>Find job ved kategori</h2>
+        {/* Category Grid */}
+        <section className={styles.categorySection}>
+          <GridContainer columns={3} autoFit={false}>
           {categories?.map((category) => (
             <div key={category.id} className={styles.categoryCard} onClick={() => handleCategoryClick(category.id)}>
               <p className={styles.categoryName}>{category.name}</p>
@@ -62,6 +63,7 @@ export default function FrontPage() {
           ))}
         </GridContainer>
       </section>
+      </div>
       <section className={styles.newsSection}>
         <h2>Udvalgte Nyheder</h2>
         <GridContainer columns={3} gap="$spacing-md" autoFit={false}>

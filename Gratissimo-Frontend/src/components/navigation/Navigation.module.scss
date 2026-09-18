@@ -9,7 +9,7 @@
   display: inline;
 }
 .navGroup:last-of-type li:first-child {
-  border-right: 2px solid $color-text;
+  border-right: 2px solid $color-white;
   padding-right: $spacing-md;
   padding-top: $spacing-sm;
   padding-bottom: $spacing-sm;
@@ -19,10 +19,13 @@
 .navGroup li a {
   text-decoration: none;
   color: $color-white;
+  padding-bottom: $spacing-xs;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.2s ease;
+}
 
-  &:hover {
-    color: $color-primary;
-  }
+.navGroup li a.active {
+  border-bottom-color: $color-white;
 }
 .navGroup:last-of-type li:last-child {
   padding-right: $spacing-md;
@@ -34,10 +37,6 @@
   background-color: $color-primary;
   border: none;
   cursor: pointer;
-  color: inherit;
+  color: $color-white;
   font: inherit;
-
-  &:hover {
-    color: $color-primary;
-  }
 }

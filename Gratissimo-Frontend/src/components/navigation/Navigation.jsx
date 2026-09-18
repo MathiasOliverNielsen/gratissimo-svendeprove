@@ -8,35 +8,32 @@ export function Navigation() {
   const navigate = useNavigate();
   return (
     <nav>
-      {/* First UL */}
       <FlexContainer justify="space-between" gap="2rem">
         <ul className={styles.navGroup}>
           <FlexContainer gap="2rem">
             <li>
-              <NavLink to="/search">Alle jobs</NavLink>
+              <NavLink to="/search" className={({ isActive }) => isActive ? styles.active : ""}>Alle jobs</NavLink>
             </li>
             <li>
-              <NavLink to="/create-ad">Opret annonce</NavLink>
+              <NavLink to="/create-ad" className={({ isActive }) => isActive ? styles.active : ""}>Opret annonce</NavLink>
             </li>
             <li>
-              <NavLink to="/news">Nyheder</NavLink>
+              <NavLink to="/news" className={({ isActive }) => isActive ? styles.active : ""}>Nyheder</NavLink>
             </li>
           </FlexContainer>
         </ul>
 
-        {/* Second UL */}
         <ul className={styles.navGroup}>
           <FlexContainer gap="1.1rem">
             {isAuthenticated ? (
               <>
                 <li>
-                  <NavLink to="/mypage">Min side</NavLink>
+                  <NavLink to="/mypage" className={({ isActive }) => isActive ? styles.active : ""}>Min side</NavLink>
                 </li>
                 <li>
                   <button
                     className={styles.logoutButton}
                     onClick={() => {
-                      // Call the logout function from useAuth
                       logout();
                       navigate("/");
                     }}
@@ -48,10 +45,10 @@ export function Navigation() {
             ) : (
               <>
                 <li>
-                  <NavLink to="/signup">Opret profil</NavLink>
+                  <NavLink to="/signup" className={({ isActive }) => isActive ? styles.active : ""}>Opret profil</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/login">Login</NavLink>
+                  <NavLink to="/login" className={({ isActive }) => isActive ? styles.active : ""}>Login</NavLink>
                 </li>
               </>
             )}

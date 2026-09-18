@@ -9,12 +9,17 @@ export default function SearchResults() {
   const { results } = location.state || { results: [] };
 
   // Fetch all jobs if no results passed
-  const { data: jobs } = useFetch("http://localhost:4000/api/job-listings");
+  const { data: jobs } = useFetch(`${import.meta.env.VITE_API_URL}/job-listings`);
   const displayResults = results.length > 0 ? results : jobs;
 
   const handleSave = (jobId) => {
     console.log("Save job:", jobId);
     // TODO: implement save functionality
+  };
+
+  const handleView = (jobId) => {
+    console.log("View job:", jobId);
+    // TODO: implement view functionality
   };
 
   return (
