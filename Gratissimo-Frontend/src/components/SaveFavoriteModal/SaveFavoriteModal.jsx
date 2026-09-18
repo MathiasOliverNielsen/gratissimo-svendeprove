@@ -15,7 +15,7 @@ export function SaveFavoriteModal({ isOpen, onClose }) {
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeButton} onClick={onClose}>
-          ✕
+          X
         </button>
 
         <h2>Log ind for at gemme jobopslag</h2>

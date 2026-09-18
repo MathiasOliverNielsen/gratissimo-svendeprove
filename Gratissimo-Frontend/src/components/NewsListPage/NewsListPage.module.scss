@@ -1,0 +1,28 @@
+@use "../../styles/variables" as *;
+
+.newsListPage {
+  padding: $spacing-2xl;
+  max-width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-xl $spacing-lg;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg $spacing-md;
+  }
+
+  h1 {
+    margin-bottom: $spacing-2xl;
+
+    @media (max-width: $breakpoint-md) {
+      margin-bottom: $spacing-xl;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      margin-bottom: $spacing-lg;
+      font-size: $font-size-lg;
+    }
+  }
+}

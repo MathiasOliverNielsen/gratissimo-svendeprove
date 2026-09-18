@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useFetch } from "../../hooks/useFetch";
 import { SearchFilter } from "../../components/SearchFilter/SearchFilter";
+import { TestimonialsSlider } from "../../components/TestimonialsSlider/TestimonialsSlider";
 import styles from "./FrontPage.module.scss";
 import { GridContainer } from "../../components/GridContainer/GridContainer";
 import { useArticles } from "../../hooks/useArticles";
@@ -15,7 +16,6 @@ export default function FrontPage() {
   const { data: jobs } = useFetch(`${import.meta.env.VITE_API_URL}/job-listings`);
   const { data: categories } = useFetch(`${import.meta.env.VITE_API_URL}/job-categories`);
 
-  // Pick 3 random articles but slice out article 3 cause no img in backend
   const randomArticles =
     articles
       ?.filter((a) => a.id !== 3)
@@ -50,9 +50,8 @@ export default function FrontPage() {
   return (
     <>
       <SearchFilter />
-      <div className={styles.categoryWrapper}>
+      <section className={styles.categoryWrapper}>
         <h2>Find job ved kategori</h2>
-        {/* Category Grid */}
         <section className={styles.categorySection}>
           <GridContainer columns={3} autoFit={false}>
           {categories?.map((category) => (
@@ -63,15 +62,16 @@ export default function FrontPage() {
           ))}
         </GridContainer>
       </section>
-      </div>
+      </section>
       <section className={styles.newsSection}>
         <h2>Udvalgte Nyheder</h2>
-        <GridContainer columns={3} gap="$spacing-md" autoFit={false}>
+        <GridContainer columns={3} gap="2rem" autoFit={false}>
           {randomArticles.map((article) => (
             <NewsCard key={article.id} article={article} onClick={() => navigate(`/news/${article.id}`)} />
           ))}
         </GridContainer>
       </section>
+      <TestimonialsSlider />
     </>
   );
 }

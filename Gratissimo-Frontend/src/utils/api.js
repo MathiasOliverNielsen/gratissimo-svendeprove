@@ -7,6 +7,7 @@ import { API_BASE_URL, STORAGE_KEYS } from './constants.js';
 import { setCookie, getCookie, deleteCookie } from './cookieUtils.js';
 
 let authToken = null;
+let refreshToken = null;
 
 /**
  * Gemmer login-token i cookies
@@ -27,6 +28,27 @@ export function getAuthToken() {
   if (authToken) return authToken;
   authToken = getCookie(STORAGE_KEYS.AUTH_TOKEN);
   return authToken;
+}
+
+/**
+ * Gemmer refresh-token i cookies
+ */
+export function setRefreshToken(token) {
+  refreshToken = token;
+  if (token) {
+    setCookie('refreshToken', token, 7);
+  } else {
+    deleteCookie('refreshToken');
+  }
+}
+
+/**
+ * Henter refresh-token fra cookies
+ */
+export function getRefreshToken() {
+  if (refreshToken) return refreshToken;
+  refreshToken = getCookie('refreshToken');
+  return refreshToken;
 }
 
 /**

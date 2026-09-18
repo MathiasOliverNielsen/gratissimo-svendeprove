@@ -1,0 +1,155 @@
+@use "../../styles/variables" as *;
+
+.testimonialSlider {
+  padding: $spacing-2xl;
+  max-width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-xl $spacing-lg;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg $spacing-md;
+  }
+}
+
+.sliderContainer {
+  max-width: 800px;
+  margin: 0 auto $spacing-2xl;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: $breakpoint-md) {
+    min-height: 220px;
+    margin-bottom: $spacing-xl;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    min-height: 200px;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.testimonialCard {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-2xl $spacing-2xl;
+  background-color: transparent;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-xl $spacing-xl;
+    gap: $spacing-md;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg $spacing-md;
+    gap: $spacing-sm;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.testimonialHeading {
+  margin: 0;
+  font-size: $font-size-xl;
+  font-weight: 600;
+  color: $color-primary;
+  line-height: 1.4;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-lg;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-size-md;
+  }
+}
+
+.testimonialText {
+  font-size: $font-size-md;
+  font-weight: 400;
+  color: $color-text;
+  margin: 0;
+  line-height: 1.6;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-sm;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 0.875rem;
+  }
+}
+
+.testimonialAuthor {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.authorName {
+  margin: 0;
+  font-size: $font-size-md;
+  font-weight: 600;
+  color: $color-primary;
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: $font-size-sm;
+  }
+}
+
+.authorTitle {
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $color-gray;
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 0.65rem;
+  }
+}
+
+.dotsContainer {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: $border-radius-full;
+  border: 2px solid $color-primary;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+
+  @media (max-width: $breakpoint-sm) {
+    width: 10px;
+    height: 10px;
+    border-width: 1.5px;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    transform: scale(1.15);
+  }
+
+  &.active {
+    background-color: $color-primary;
+  }
+}

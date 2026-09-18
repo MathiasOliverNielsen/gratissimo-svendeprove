@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { setAuthToken, getAuthToken, apiCall } from '../utils/api.js';
+import { setAuthToken, getAuthToken, setRefreshToken, getRefreshToken, apiCall } from '../utils/api.js';
 import { getStorageItem, setStorageItem, removeStorageItem } from '../utils/storage.js';
 import { STORAGE_KEYS } from '../utils/constants.js';
 
@@ -56,7 +56,7 @@ export function useAuth() {
       }
 
       setAuthToken(accessToken);
-      setStorageItem('refreshToken', refreshToken);
+      setRefreshToken(refreshToken);
 
       const userData = { id, firstname, lastname, email };
       setStorageItem(STORAGE_KEYS.USER, userData);
@@ -78,8 +78,8 @@ export function useAuth() {
   const logout = useCallback(() => {
     try {
       setAuthToken(null);
+      setRefreshToken(null);
       removeStorageItem(STORAGE_KEYS.USER);
-      removeStorageItem('refreshToken');
       setUser(null);
       setIsAuthenticated(false);
       setError(null);
@@ -94,7 +94,7 @@ export function useAuth() {
       setLoading(true);
       setError(null);
 
-      const response = await apiCall('/users', {
+      await apiCall('/users', {
         method: 'POST',
         body: {
           email: userData.email,
@@ -107,11 +107,6 @@ export function useAuth() {
           zipcode: userData.zipcode,
         },
       });
-
-      setAuthToken(accessToken);
-      setStorageItem(STORAGE_KEYS.USER, newUser);
-      setUser(newUser);
-      setIsAuthenticated(true);
 
       return { success: true };
     } catch (err) {

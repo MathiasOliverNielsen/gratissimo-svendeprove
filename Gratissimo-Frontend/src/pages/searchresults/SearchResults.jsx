@@ -12,15 +12,6 @@ export default function SearchResults() {
   const { data: jobs } = useFetch(`${import.meta.env.VITE_API_URL}/job-listings`);
   const displayResults = results.length > 0 ? results : jobs;
 
-  const handleSave = (jobId) => {
-    console.log("Save job:", jobId);
-    // TODO: implement save functionality
-  };
-
-  const handleView = (jobId) => {
-    console.log("View job:", jobId);
-    // TODO: implement view functionality
-  };
 
   return (
     <main className={styles.searchResults}>
