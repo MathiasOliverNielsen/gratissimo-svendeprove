@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useAuthContext } from "../../../context/AuthContext";
 import { InputField } from "../../../components/InputField/InputField";
 import { Button } from "../../../components/Button/Button";
+import { validateNoScriptTags } from "../../../utils/validation";
 import styles from "./Login.module.scss";
 
 // Login and registration component with toggle between modes
@@ -60,10 +61,19 @@ export default function Login({ initialMode = "login" }) {
       return;
     }
 
+    const textFields = ["firstname", "lastname", "address", "city"];
+    for (const field of textFields) {
+      if (!validateNoScriptTags(formData[field])) {
+        alert(`${field} indeholder ugyldige tegn`);
+        return;
+      }
+    }
+
     const result = await register(formData);
 
     if (result.success) {
-      navigate("/");
+      setFormData({ email: "", password: "", confirmPassword: "", firstname: "", lastname: "", phone: "", address: "", city: "", zipcode: "" });
+      setIsLogin(true);
     }
   };
 

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { GridContainer } from "../GridContainer/GridContainer";
 import { FlexContainer } from "../FlexContainer/FlexContainer";
-import { InputField } from "../InputField/InputField";
-import { Button } from "../Button/Button";
 import { NavLink } from "react-router";
+import { useAuthContext } from "../../context/AuthContext";
+import { validateEmail } from "../../utils/validation";
+import { getAuthToken } from "../../utils/api";
 import styles from "./Footer.module.scss";
 import facebook from "../../assets/icons/SoMe/Facebook.png";
 import googleplus from "../../assets/icons/SoMe/Google Plus.png";
@@ -11,7 +12,60 @@ import instagram from "../../assets/icons/SoMe/Instagram Circle.png";
 import linkedin from "../../assets/icons/SoMe/LinkedIn Circled.png";
 
 export function Footer() {
+  const { isAuthenticated } = useAuthContext();
   const [email, setEmail] = useState("");
+  const [subscriptionMessage, setSubscriptionMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleNewsletterSubscribe = async (e) => {
+    e.preventDefault();
+
+    if (!isAuthenticated) {
+      setSubscriptionMessage("Du skal være logget ind for at tilmelde dig nyhedsbrevet");
+      setTimeout(() => setSubscriptionMessage(""), 4000);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setSubscriptionMessage("Venligst indtast en gyldig e-mailadresse");
+      setTimeout(() => setSubscriptionMessage(""), 4000);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const token = getAuthToken();
+      const params = new URLSearchParams();
+      params.append("email", email);
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: params.toString(),
+      });
+
+      if (response.ok) {
+        setSubscriptionMessage("Tak for din tilmelding!");
+        setEmail("");
+        setTimeout(() => setSubscriptionMessage(""), 4000);
+      } else if (response.status === 400 || response.status === 409) {
+        setSubscriptionMessage("E-mailadressen er allerede tilmeldt");
+        setTimeout(() => setSubscriptionMessage(""), 4000);
+      } else {
+        setSubscriptionMessage("En fejl opstod. Prøv igen senere.");
+        setTimeout(() => setSubscriptionMessage(""), 4000);
+      }
+    } catch (error) {
+      console.error("Subscription error:", error);
+      setSubscriptionMessage("En fejl opstod. Prøv igen senere.");
+      setTimeout(() => setSubscriptionMessage(""), 4000);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <footer className={styles.footer}>
@@ -74,17 +128,18 @@ export function Footer() {
         <section className={`${styles.footerSection} ${styles.wide}`}>
           <h3>Vil du have jobs direkte i din indbakke?</h3>
           <p>Tilmeld dig vores elektroniske nyhedsbrev</p>
-          <form className={styles.newsletterForm}>
+          <form className={styles.newsletterForm} onSubmit={handleNewsletterSubscribe}>
             <FlexContainer className={styles.newsletterForm} gap="$spacing-sm">
               <div className={styles.inputWrapper}>
-                <InputField type="email" placeholder="@ Indtast email..." value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <input type="email" placeholder="Indtast email..." value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} />
               </div>
               <div className={styles.buttonWrapper}>
-                <Button type="submit" variant="secondary">
-                  Tilmeld
-                </Button>
+                <button type="submit" disabled={loading}>
+                  {loading ? "Tilmelder..." : "Tilmeld"}
+                </button>
               </div>
             </FlexContainer>
+            {subscriptionMessage && <p className={styles.subscriptionMessage}>{subscriptionMessage}</p>}
           </form>
         </section>
 

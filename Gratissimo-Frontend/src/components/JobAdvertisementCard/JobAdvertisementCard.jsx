@@ -6,7 +6,7 @@ import { saveFavorite, deleteFavorite, apiCall } from "../../utils/api";
 import favoriteIcon from "../../assets/icons/icons8-favorite-50.png";
 import styles from "./JobAdvertisementCard.module.scss";
 
-export function JobAdvertisementCard({ job, onSave }) {
+export function JobAdvertisementCard({ job, onSave, onRemove, hideSave, onEdit }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
@@ -58,17 +58,22 @@ export function JobAdvertisementCard({ job, onSave }) {
   };
 
   const handleRemoveClick = async () => {
-    if (!favoriteId || isLoading) return;
+    if (isLoading) return;
 
-    setIsLoading(true);
-    try {
-      await deleteFavorite(favoriteId);
-      setIsFavorited(false);
-      setFavoriteId(null);
-    } catch (error) {
-      console.error("Failed to remove favorite:", error);
-    } finally {
-      setIsLoading(false);
+    if (onRemove) {
+      await onRemove();
+    } else {
+      if (!favoriteId) return;
+      setIsLoading(true);
+      try {
+        await deleteFavorite(favoriteId);
+        setIsFavorited(false);
+        setFavoriteId(null);
+      } catch (error) {
+        console.error("Failed to remove favorite:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -126,7 +131,11 @@ export function JobAdvertisementCard({ job, onSave }) {
         </article>
 
         <footer className={styles.expandedFooter}>
-          {isFavorited ? (
+          {hideSave ? (
+            <button className={styles.removeButton} onClick={handleRemoveClick} disabled={isLoading}>
+              Slet
+            </button>
+          ) : isFavorited ? (
             <button className={styles.removeButton} onClick={handleRemoveClick} disabled={isLoading}>
               <img src={favoriteIcon} alt="Favorit hjerte" className={styles.heartIcon} />
               Fjern
@@ -140,6 +149,11 @@ export function JobAdvertisementCard({ job, onSave }) {
           <button className={styles.closeButton} onClick={() => setIsExpanded(false)}>
             Luk
           </button>
+          {onEdit && (
+            <button className={styles.editButton} onClick={onEdit}>
+              Redigere
+            </button>
+          )}
         </footer>
 
         <SaveFavoriteModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
@@ -162,7 +176,11 @@ export function JobAdvertisementCard({ job, onSave }) {
       </header>
 
       <footer className={styles.collapsedFooter}>
-        {isFavorited ? (
+        {hideSave ? (
+          <button className={styles.removeButton} onClick={handleRemoveClick} disabled={isLoading}>
+            Slet
+          </button>
+        ) : isFavorited ? (
           <button className={styles.removeButton} onClick={handleRemoveClick} disabled={isLoading}>
             <img src={favoriteIcon} alt="Favorit hjerte" className={styles.heartIcon} />
             Fjern
@@ -176,6 +194,11 @@ export function JobAdvertisementCard({ job, onSave }) {
         <button className={styles.openButton} onClick={() => setIsExpanded(true)}>
           Åben
         </button>
+        {onEdit && (
+          <button className={styles.editButton} onClick={onEdit}>
+            Redigere
+          </button>
+        )}
       </footer>
 
       <SaveFavoriteModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

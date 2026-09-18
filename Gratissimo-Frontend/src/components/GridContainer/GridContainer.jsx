@@ -21,13 +21,13 @@ export function GridContainer({ children, columns = 1, gap = "1rem", autoFit = t
 
   const gridStyle = {
     display: "grid",
-    gridTemplateColumns,
+    gridTemplateColumns: `var(--grid-columns, ${gridTemplateColumns})`,
     gap: gapValue,
     ...style,
   };
 
   return (
-    <div className={`grid-container ${className}`.trim()} style={gridStyle}>
+    <div className={`grid-container grid-cols-${columns}`} style={gridStyle}>
       {children}
     </div>
   );

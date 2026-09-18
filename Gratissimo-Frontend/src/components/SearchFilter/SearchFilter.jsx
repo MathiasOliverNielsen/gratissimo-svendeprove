@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useFetch } from "../../hooks/useFetch";
+import { validateNoScriptTags } from "../../utils/validation";
 import { FlexContainer } from "../FlexContainer/FlexContainer";
 import { InputField } from "../InputField/InputField";
 import searchIcon from "../../assets/icons/icons8-search-50.png";
@@ -31,6 +32,11 @@ export function SearchFilter() {
 
   // === HANDLE SEARCH ===
   const handleSearch = () => {
+    if (!validateNoScriptTags(searchText)) {
+      alert("Søgetekst indeholder ugyldige tegn");
+      return;
+    }
+
     navigate("/search", {
       state: {
         filters,

@@ -4,6 +4,10 @@
   background-color: $color-primary;
   color: $color-white;
   padding: $spacing-lg;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-md;
+  }
 }
 
 .footerSection {
@@ -34,16 +38,58 @@
 }
 .newsletterForm {
   margin-top: $spacing-md;
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    input {
+      width: 100%;
+      border-radius: $border-radius-md;
+    }
+
+    button {
+      width: 100%;
+      border-radius: $border-radius-md;
+    }
+  }
 }
 .wide {
   grid-column: span 2;
+
+  @media (max-width: $breakpoint-md) {
+    grid-column: span 1;
+  }
 }
 .inputWrapper {
   display: flex;
   align-items: center;
 
-  .inputWrapper input {
+  input {
     border-radius: $border-radius-md 0 0 $border-radius-md;
+    width: 100%;
+    padding: $spacing-sm $spacing-lg;
+    border: 1px solid #ddd;
+    font-size: $font-size-md;
+    height: 44px;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+    }
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    flex: 1;
+
+    input {
+      border-radius: $border-radius-md;
+      padding: $spacing-sm $spacing-md;
+    }
   }
 }
 
@@ -54,6 +100,32 @@
   button {
     border-radius: 0 $border-radius-md $border-radius-md 0;
     background-color: $color-white;
+    color: $color-text;
+    font-weight: 600;
+    padding: $spacing-sm $spacing-lg;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 44px;
+    white-space: nowrap;
+    font-family: inherit;
+    font-size: $font-size-md;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    button {
+      border-radius: $border-radius-md;
+      width: 100%;
+    }
   }
 }
 
@@ -66,4 +138,12 @@
     height: 40px;
     width: auto;
   }
+}
+
+.subscriptionMessage {
+  margin-top: $spacing-sm;
+  font-size: $font-size-sm;
+  color: $color-white;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
 }

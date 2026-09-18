@@ -1,0 +1,135 @@
+@use "../../styles/variables" as *;
+
+.myPage {
+  padding: $spacing-2xl;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-xl $spacing-lg;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg $spacing-md;
+  }
+}
+
+.resultsList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-2xl;
+  border-bottom: 1px solid $color-border;
+  padding-bottom: $spacing-xl;
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-lg;
+  }
+
+  h1 {
+    font-size: $font-size-xl;
+    font-weight: 600;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: $font-size-lg;
+    }
+  }
+}
+
+.headerNav {
+  display: flex;
+  gap: $spacing-lg;
+  align-items: center;
+
+  @media (max-width: $breakpoint-sm) {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: $spacing-md;
+  }
+}
+
+.link {
+  color: $color-primary;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.logoutButton {
+  padding: $spacing-sm $spacing-lg;
+  background-color: $color-danger;
+  color: $color-white;
+  border: none;
+  border-radius: $border-radius-full;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.tabSwitcher {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-2xl;
+  border-bottom: 1px solid $color-border;
+
+  @media (max-width: $breakpoint-sm) {
+    gap: $spacing-sm;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.tab {
+  padding: $spacing-md $spacing-lg;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  color: $color-gray;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-md $spacing-sm;
+    font-size: $font-size-sm;
+  }
+
+  &:hover {
+    color: $color-text;
+  }
+
+  &.active {
+    color: $color-primary;
+    border-bottom-color: $color-primary;
+  }
+}
+
+.contentSection {
+  h2 {
+    font-size: $font-size-lg;
+    font-weight: 600;
+  }
+
+  p {
+    color: $color-gray;
+  }
+}
+

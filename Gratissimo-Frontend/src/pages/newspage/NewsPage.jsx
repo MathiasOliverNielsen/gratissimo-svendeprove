@@ -39,7 +39,7 @@ export default function NewsPage() {
       {/* All other articles grid */}
       <section className={styles.allArticles}>
         <h2>Alle nyheder</h2>
-        <GridContainer columns={3} gap="$spacing-md" autoFit={false}>
+        <GridContainer columns={3} gap="2rem" autoFit={false}>
           {allOtherArticles.map((a) => (
             <NewsCard key={a.id} article={a} onClick={() => navigate(`/news/${a.id}`)} />
           ))}

@@ -14,7 +14,7 @@ export default function NewsListPage() {
   return (
     <main className={styles.newsListPage}>
       <h1>Alle artikler</h1>
-      <GridContainer columns={3} gap="$spacing-md" autoFit={false}>
+      <GridContainer columns={3} gap="2rem" autoFit={false}>
         {allArticles.map((article) => (
           <NewsCard key={article.id} article={article} onClick={() => navigate(`/news/${article.id}`)} />
         ))}

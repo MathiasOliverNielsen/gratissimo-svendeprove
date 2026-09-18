@@ -4,8 +4,37 @@
 .grid-container {
   display: grid;
   width: 100%;
+}
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr !important;
+// Responsive column layouts
+.grid-cols-1 {
+  @media (max-width: $breakpoint-md) {
+    --grid-columns: repeat(1, 1fr);
+  }
+}
+
+.grid-cols-2 {
+  @media (max-width: $breakpoint-md) {
+    --grid-columns: repeat(1, 1fr);
+  }
+}
+
+.grid-cols-3 {
+  @media (max-width: $breakpoint-md) {
+    --grid-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    --grid-columns: repeat(1, 1fr);
+  }
+}
+
+.grid-cols-6 {
+  @media (max-width: $breakpoint-md) {
+    --grid-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    --grid-columns: repeat(1, 1fr);
   }
 }

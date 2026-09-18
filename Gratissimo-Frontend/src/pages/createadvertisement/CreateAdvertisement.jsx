@@ -1,14 +1,20 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router";
 import { InputField } from "../../components/InputField/InputField";
 import { Button } from "../../components/Button/Button";
 import { useFetch } from "../../hooks/useFetch";
-import { isRequired } from "../../utils/validation";
+import { isRequired, validateNoScriptTags } from "../../utils/validation";
 import { getCookie } from "../../utils/cookieUtils";
+import { useAuthContext } from "../../context/AuthContext";
+import { apiCall } from "../../utils/api";
 import styles from "./CreateAdvertisement.module.scss";
 
 export default function CreateAdvertisement() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { user } = useAuthContext();
+  const adId = searchParams.get("id");
+  const isEditing = !!adId;
   const { data: workTypes } = useFetch(`${import.meta.env.VITE_API_URL}/workTypes`);
   const { data: categories } = useFetch(`${import.meta.env.VITE_API_URL}/job-categories`);
   const [loading, setLoading] = useState(false);
@@ -26,6 +32,31 @@ export default function CreateAdvertisement() {
     zipcode: "",
   });
 
+  useEffect(() => {
+    if (isEditing) {
+      const fetchAd = async () => {
+        try {
+          const ad = await apiCall(`/job-listings/${adId}`);
+          setFormData({
+            title: ad.title || "",
+            description: ad.description || "",
+            organization: ad.organization || "",
+            city: ad.city || "",
+            jobCategoryId: ad.jobCategoryId || "",
+            workTypeId: ad.workTypeId || "",
+            workHome: ad.workHome || "",
+            address: ad.address || "",
+            zipcode: ad.zipcode || "",
+          });
+        } catch (error) {
+          console.error("Failed to fetch ad:", error);
+          setErrors({ submit: "Kunne ikke indlæse annoncen." });
+        }
+      };
+      fetchAd();
+    }
+  }, [adId, isEditing]);
+
   // Checks if all required fields are filled
   const validateForm = () => {
     const fields = {
@@ -40,10 +71,14 @@ export default function CreateAdvertisement() {
       zipcode: "Postnummer",
     };
 
+    const textFields = ["title", "description", "organization", "city", "address", "zipcode"];
     const newErrors = {};
+
     Object.entries(fields).forEach(([key, label]) => {
       if (!isRequired(formData[key])) {
         newErrors[key] = `${label} er påkrævet`;
+      } else if (textFields.includes(key) && !validateNoScriptTags(formData[key])) {
+        newErrors[key] = `${label} indeholder ugyldige tegn`;
       }
     });
 
@@ -84,12 +119,17 @@ export default function CreateAdvertisement() {
     try {
       const params = new URLSearchParams({
         ...formData,
-        userId: "1",
+        userId: user.id,
         regionId: "1",
       });
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/job-listings`, {
-        method: "POST",
+      const method = isEditing ? "PUT" : "POST";
+      const url = isEditing
+        ? `${import.meta.env.VITE_API_URL}/job-listings/${adId}`
+        : `${import.meta.env.VITE_API_URL}/job-listings`;
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           Authorization: `Bearer ${token}`,
@@ -98,7 +138,8 @@ export default function CreateAdvertisement() {
       });
 
       if (response.ok) {
-        setSuccessMessage("Annoncen er oprettet!");
+        const message = isEditing ? "Annoncen er opdateret!" : "Annoncen er oprettet!";
+        setSuccessMessage(message);
         setFormData({
           title: "",
           description: "",
@@ -110,9 +151,10 @@ export default function CreateAdvertisement() {
           address: "",
           zipcode: "",
         });
-        setTimeout(() => navigate("/"), 2000);
+        setTimeout(() => navigate("/mypage"), 2000);
       } else {
-        setErrors({ submit: "Kunne ikke oprette annoncen. Prøv igen." });
+        const errorMsg = isEditing ? "Kunne ikke opdatere annoncen. Prøv igen." : "Kunne ikke oprette annoncen. Prøv igen.";
+        setErrors({ submit: errorMsg });
       }
     } catch (error) {
       setErrors({ submit: "En fejl opstod. Prøv igen senere." });
@@ -124,9 +166,13 @@ export default function CreateAdvertisement() {
   return (
     <>
       <section className={styles.header}>
-        <h1>Opret en annonce og find frivillige til din forening</h1>
-        <p>Gratissimo er gratis for alle. Frivillige, organisationer og foreninger. Du skaber det frivillige liv og vi formidler kontakten. Når du har fundet en frivillig til din forening, kan du blot fjerne annoncen igen ved at gå til din side.</p>
-        <a href="#mypage">Gå til min side</a>
+        <h1>{isEditing ? "Redigere Annonce" : "Opret en annonce og find frivillige til din forening"}</h1>
+        {!isEditing && (
+          <>
+            <p>Gratissimo er gratis for alle. Frivillige, organisationer og foreninger. Du skaber det frivillige liv og vi formidler kontakten. Når du har fundet en frivillig til din forening, kan du blot fjerne annoncen igen ved at gå til din side.</p>
+            <a href="#mypage">Gå til min side</a>
+          </>
+        )}
       </section>
 
       <section className={styles.formSection}>
@@ -202,7 +248,10 @@ export default function CreateAdvertisement() {
           </div>
 
           <Button type="submit" variant="primary" disabled={loading}>
-            {loading ? "Opretter annonce..." : "Opret annonce"}
+            {isEditing
+              ? (loading ? "Gemmer ændringer..." : "Gem Ændringer")
+              : (loading ? "Opretter annonce..." : "Opret annonce")
+            }
           </Button>
         </form>
       </section>
